@@ -1,0 +1,131 @@
+@CHARSET "utf-8";
+
+body {
+	font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica,
+		sans-serif;
+	font-size: 12px;
+}
+
+table {
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+h1 {
+	background-color: #F0F0F0;
+	border: 1px solid #CCCCCC;
+	font-weight: bold;
+	outline: 0 none;
+	padding: 3px 10px;
+	margin: 10px 0px;
+	text-decoration: none;
+}
+
+h2 {
+	background-color: #F0F0F0;
+	border: 1px solid #CCCCCC;
+	font-weight: bold;
+	outline: 0 none;
+	padding: 3px 10px;
+	margin: 10px 0px;
+	text-decoration: none;
+}
+
+h3 {
+	background-color: #F0F0F0;
+	border: 1px solid #CCCCCC;
+	font-weight: bold;
+	outline: 0 none;
+	font-style: italic;
+	padding: 3px 10px;
+	margin: 10px 0px;
+	text-decoration: none;
+}
+
+h4 {
+	font-style: italic;
+	padding: 10px 0px 5px 0px;
+	margin: 0px;
+	text-decoration: none;
+}
+table h4 {
+	padding: 5px 0px 5px 0px;
+}
+.version {
+	font-size: 10px;
+	color: #CCCCCC;
+}
+
+.content {
+	padding: 3px 10px;
+}
+
+.relation {
+	font-size: 12px;
+}
+
+li {
+	padding-top: 2px;
+	font-size: 11px;
+}
+
+table, th,td {
+	border: 1px solid #CCCCCC;
+}
+table.complexType {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+th {
+	background-color: #CCCCCC;
+}
+
+th.subHeader {
+	background-color: #F0F0F0;
+}
+
+.passed,.failed,.failed_future,.warning {
+	font-weight: bold;
+	text-align: center;
+}
+
+.passed {
+	color: green;
+}
+
+.failed_future,.warning {
+	color: orange;
+}
+
+.failed {
+	color: red;
+}
+
+.center {
+	text-align: center;
+}
+.right {
+	text-align: right;
+}
+
+.location {
+	color: blue;
+	font-family: courier;
+}
+.fatal {
+	color: red;
+    font-weight: bold;
+}
+.ignored {
+	opacity: 0.5;
+}
+.ignored img {
+	width: 12px;
+}
+.directory {
+	font-size: 80%;
+}
+}

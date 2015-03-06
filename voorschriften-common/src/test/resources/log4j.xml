@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Common classes for multiple modules
+  %%
+  Copyright (C) 2012 - 2015 Team Applicatie Integratie (Gemeente Den Haag)
+  %%
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as
+  published by the Free Software Foundation, either version 3 of the 
+  License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public 
+  License along with this program.  If not, see
+  <http://www.gnu.org/licenses/gpl-3.0.html>.
+  #L%
+  -->
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" threshold="info">
+
+<appender name="FILE" class="org.apache.log4j.FileAppender">
+    <param name="File" value="app.log"/>
+    <param name="Append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">
+        <!-- print datetime in ISO format, time since application startup,[thread],5-char priority, 3-levels classname, message -->
+        <param name="ConversionPattern" value="%d %-5p %c{3} %x - %m%n"/>
+    </layout>
+</appender>
+
+<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%-5p: %m%n"/>
+    </layout>
+</appender>
+
+
+<category name="nl.denhaag.twb">
+    <priority value="info"/>
+</category>
+
+
+<root>
+    <!-- default for all loggers (classes) log warnings, errors and fatal errors -->
+    <priority value="info"/>
+   <appender-ref ref="CONSOLE"/>
+</root>
+
+</log4j:configuration>
