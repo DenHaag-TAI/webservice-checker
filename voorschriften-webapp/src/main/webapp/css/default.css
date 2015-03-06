@@ -1,0 +1,60 @@
+body {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+}
+
+h1 {
+	color: #007E66;
+	font-weight: bold;
+	outline: 0 none;
+	padding: 3px 10px;
+	margin: 10px 0px;
+	text-decoration: none;
+}
+h2 {
+	margin-top: 0;
+	color: #007E66;
+	font-size: 125%;
+	
+}
+.block {
+	background-color: #dedede;
+	border: 1px solid #CCCCCC;
+    background-image: url("../images/fade.gif");
+    background-repeat: repeat-x;
+    color: #000000;
+    padding: 8px 10px;
+}
+#wrapper {
+    width: 910px;
+}
+#form {
+	width: 600px;
+    float: left;
+}
+#info {
+	width: 260px;
+    float: right;
+}
+.blockdiv {
+	padding-bottom: 10px;
+}
+#description {
+	font-style:italic;
+	font-size: 95%;
+}
+#created {
+	font-size: 9px;
+	font-style: italic;
+	padding-bottom: 10px;
+}
+th {
+	text-align: left;
+	vertical-align: text-top;
+}
+
+.namespaceDesc {
+	font-size: 80%;
+	margin-left: 5px;
+		color: #007E66;
+}
