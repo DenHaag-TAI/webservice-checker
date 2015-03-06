@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>nl.denhaag.tw.voorschriften</groupId>
+		<artifactId>voorschriften-project</artifactId>
+		<version>3.3-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>voorschriften-standalone</artifactId>
+	<name>Webservice voorschriften applicatie</name>
+	<description>Een applicatie die WSDL's en XSD controleert of ze aan de voorschriften van de Gemeente Den Haag voldoen.</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<mainClass>nl.denhaag.twb.voorschriften.VoorschriftenStandalone</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2</version>
+				<configuration>
+					<mainClass>nl.denhaag.twb.voorschriften.VoorschriftenStandalone</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2.1</version>				
+				<configuration>
+					<descriptors>
+						<descriptor>src/assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<artifactId>voorschriften-common</artifactId>
+			<groupId>nl.denhaag.tw.voorschriften</groupId>
+			<version>3.3-SNAPSHOT</version>
+
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0</version>
+		</dependency>
+	</dependencies>
+</project>
