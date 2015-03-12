@@ -71,6 +71,8 @@ li {
 
 table, th,td {
 	border: 1px solid #CCCCCC;
+	padding-left: 3px;
+    padding-right: 3px;	
 }
 table.complexType {
 	margin-left: 10px;
