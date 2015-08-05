@@ -51,6 +51,7 @@ public class IconTextCellRenderer extends DefaultTableCellRenderer {
         	if (tableCellValue.getImageIcon() != null ){
         		setIcon(tableCellValue.getImageIcon());
         	}else {
+        		//geen data
         		setIcon(null);
         	}
         	if (isSelected){
