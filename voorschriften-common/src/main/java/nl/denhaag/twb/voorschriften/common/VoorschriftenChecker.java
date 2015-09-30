@@ -213,7 +213,6 @@ public class VoorschriftenChecker {
 					int highPriority = 0;
 					int lowPriority = 0;
 					try {
-						System.err.println ("Before Validate");
 						WSDLValidator.validate(sourceFile.getCanonicalPath());
 					} catch (ValidationException ex) {
 						if (ex.getBpMessages().size() > 0) {
