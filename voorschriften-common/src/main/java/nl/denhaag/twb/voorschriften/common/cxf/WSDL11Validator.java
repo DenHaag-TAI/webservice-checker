@@ -41,6 +41,7 @@ package nl.denhaag.twb.voorschriften.common.cxf;
  * under the License.
  */
 import java.io.File;
+
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -194,7 +195,7 @@ public class WSDL11Validator extends AbstractDefinitionValidator {
 
         }
         if (!schemaValidator.isValid()) {
-            this.addErrorMessage(schemaValidator.getErrorMessage());            
+            this.addErrorMessage(schemaValidator.getErrorMessage());
             throw new ToolException(this.getErrorMessage());
 
         }

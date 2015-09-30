@@ -171,7 +171,7 @@ public class VoorschriftenChecker {
 		}
 		index = index.replaceFirst("REPLACE", table.toString());
 		StringBuilder excludedNamespacesBuilder = new StringBuilder();
-		if (excludedNamespaces.size() > 0){
+		if (excludedNamespaces != null && excludedNamespaces.size() > 0){
 			excludedNamespacesBuilder.append("<br/><b>Namespaces zijn genegeerd die beginnen met:</b>\n<ul>");
 			for (String excludedNamespace: excludedNamespaces){
 				excludedNamespacesBuilder.append("<li>" + excludedNamespace + "</li>");
@@ -213,6 +213,7 @@ public class VoorschriftenChecker {
 					int highPriority = 0;
 					int lowPriority = 0;
 					try {
+						System.err.println ("Before Validate");
 						WSDLValidator.validate(sourceFile.getCanonicalPath());
 					} catch (ValidationException ex) {
 						if (ex.getBpMessages().size() > 0) {

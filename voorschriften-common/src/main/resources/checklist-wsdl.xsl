@@ -93,13 +93,7 @@
 							</xsl:choose>							
 							<td></td>
 							<td></td>
-						</tr>
-						<tr>
-							<td>Berichten in UTF-8</td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>						
+						</tr>			
 						<tr>
 							<td>Namespace en versionering:</td>
 							<xsl:choose>

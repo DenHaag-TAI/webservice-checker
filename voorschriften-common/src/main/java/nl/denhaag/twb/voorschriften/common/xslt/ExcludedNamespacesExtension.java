@@ -77,9 +77,11 @@ public class ExcludedNamespacesExtension extends ExtensionFunctionDefinition {
 			if (arg1.length == 1){
 				String value = arg1[0].iterate().next().getStringValue();
 				boolean found = false;
-				for (int i =0; !found && i < excludedNamespaces.size(); i++){
-					found = value.startsWith(excludedNamespaces.get(i));
-				}
+				if (excludedNamespaces != null){
+					for (int i =0; !found && i < excludedNamespaces.size(); i++){
+						found = value.startsWith(excludedNamespaces.get(i));
+					}
+				}	
 				if (found){
 					return BooleanValue.TRUE;
 				}

@@ -120,8 +120,6 @@ public class XMLTransformer {
     	compiler.setURIResolver(new CustomURIResolver());
     	XsltExecutable executable = compiler.compile(xsltSource);
     	XsltTransformer transformer = executable.load();
-       // XsltErrorListener errorListener = new XsltErrorListener();
-        //transformer.setErrorListener(errorListener);
         if (parameters != null) {
             for (Map.Entry<String, Object> entry : parameters.entrySet()) {
                 transformer.setParameter(new QName(entry.getKey()), new XdmAtomicValue(entry.getValue().toString()));
@@ -146,6 +144,7 @@ public class XMLTransformer {
         	outputStream.close();
             return result;
         }catch(Exception e){
+        	e.printStackTrace();
         	result.setFatalMessage(e.getMessage());
             result.setType(type);
             result.setSourceFileName(inputFile.getName());
