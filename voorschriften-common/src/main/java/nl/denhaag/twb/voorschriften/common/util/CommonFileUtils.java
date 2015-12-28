@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -180,6 +181,7 @@ public final class CommonFileUtils {
 		InputStreamReader fileReader = new InputStreamReader(is);
 		BufferedReader bFileReader = new BufferedReader(fileReader);
 		String line = null;
+		
 		while ((line = bFileReader.readLine()) != null) {
 			emailContent.append(line + "\n");
 		}

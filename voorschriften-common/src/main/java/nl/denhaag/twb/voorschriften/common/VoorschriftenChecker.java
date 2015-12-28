@@ -40,15 +40,16 @@ import nl.denhaag.twb.voorschriften.common.util.VoorschriftenLogger;
 import nl.denhaag.twb.voorschriften.common.xslt.XMLTransformer;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 public class VoorschriftenChecker {
+	private static final Logger LOGGER = Logger.getLogger(VoorschriftenChecker.class);
 	private static final String TD_END = "</TD>";
 	private static final String TD = "<TD class=\"right\">";
 	public static final String SEPARATOR = "/";
 	public final static String STANDARD_DATE_FORMAT = "dd MMMM yyyy HH:mm";
 	private List<String> failedWSDLs = new ArrayList<String>();
-	// private static final Logger LOGGER =
-	// Logger.getLogger(VoorschriftenChecker.class);
 	private XMLTransformer xmlTransformer;
 	private VoorschriftenLogger twbLogger;
 
@@ -75,6 +76,8 @@ public class VoorschriftenChecker {
 	}
 
 	public List<TransformResult> generateReports(File sourceDir, File reportDir, List<String> excludedNamespaces) throws Exception {
+		LOGGER.log(Level.INFO,"enter generateReports");
+		LOGGER.log(Level.DEBUG,"enter generateReports: sourceDir = "+sourceDir+" reportDir = "+reportDir);
 		FileUtils.deleteDirectory(reportDir);
 		reportDir.mkdirs();
 		File cssDir = new File(reportDir, "css");
@@ -187,6 +190,7 @@ public class VoorschriftenChecker {
 			twbLogger.logBigMessage("WSDL not WSI-compliant: " + failedWSDL);
 
 		}
+		LOGGER.log(Level.DEBUG,"end generateReports");
 		return results;
 	}
 
@@ -194,8 +198,10 @@ public class VoorschriftenChecker {
 
 	public List<TransformResult> checkDir(File sourceDir, File reportDir, String baseDir, String dirPrefix,
 			String dateString, List<String> excludedNamespaces) throws Exception {
+		
 		List<TransformResult> results = new ArrayList<TransformResult>();
-
+		
+		LOGGER.log(Level.INFO,"enter checkDir");
 		for (File sourceFile : sourceDir.listFiles(new NotSVNFilenameFilter())) {
 			if (sourceFile.isDirectory()) {
 				twbLogger.logShortMessage("Genereren van rapporten in " + sourceFile.getAbsolutePath());
@@ -207,6 +213,7 @@ public class VoorschriftenChecker {
 				String fileName = sourceFile.getName();
 
 				if (fileName.toLowerCase().endsWith(".wsdl")) {
+					LOGGER.log(Level.DEBUG,"check file");
 					boolean wsiCompliant = true;
 					StringBuilder bpErrorMessages = new StringBuilder();
 					StringBuilder otherErrorMessages = new StringBuilder();
@@ -215,38 +222,26 @@ public class VoorschriftenChecker {
 					try {
 						WSDLValidator.validate(sourceFile.getCanonicalPath());
 					} catch (ValidationException ex) {
+						LOGGER.log(Level.WARN,"checkDir: ValidationException continue");
 						if (ex.getBpMessages().size() > 0) {
 							wsiCompliant = false;
 							failedWSDLs.add(sourceFile.getAbsolutePath());
 							for (String bpMessage : ex.getBpMessages()) {
-								bpErrorMessages.append("<TR>");
-								bpErrorMessages.append(TD);
-								bpErrorMessages
-										.append("<img src=\"" +baseDir + "images/highpriority.png\"  title=\"Voldoet NIET aan de voorschriften, het heeft hoge prioriteit om dit op te lossen.\"/>");
-								bpErrorMessages.append(TD_END);
-								bpErrorMessages.append("<TD class=\"left\">");
-								bpErrorMessages.append(bpMessage);
-								bpErrorMessages.append(TD_END);
-								bpErrorMessages.append("</TR>");
+								bpErrorMessages = appendMessage (bpErrorMessages,baseDir, bpMessage ,"high");
 								highPriority++;
 							}
 						}
 						if (ex.getOtherMessages().size() > 0) {
 							for (String otherMessage : ex.getOtherMessages()) {
-								otherErrorMessages.append("<TR>");
-								otherErrorMessages.append(TD);
-								otherErrorMessages
-										.append("<img src=\"" +baseDir + "images/lowpriority.png\"  title=\"Voldoet NIET aan de voorschriften.\"/>");
-								otherErrorMessages.append(TD_END);
-								otherErrorMessages.append("<TD class=\"left\">");
-								otherErrorMessages.append(otherMessage);
-								otherErrorMessages.append(TD_END);
-								otherErrorMessages.append("</TR>");
+								otherErrorMessages = appendMessage (otherErrorMessages,baseDir, otherMessage ,"low");
 								lowPriority++;
 							}
 						}
 					} catch (Exception ex) {
+						//Something went wrong
+						LOGGER.log(Level.FATAL,ex.getMessage());
 						twbLogger.logBigMessage(ex.getMessage());
+						System.exit(-1);
 					}
 					TransformResult result = xmlTransformer.generateWSDLReport(sourceFile, reportDir, dateString,
 							wsiCompliant, bpErrorMessages.toString(), otherErrorMessages.toString(), baseDir,
@@ -273,18 +268,30 @@ public class VoorschriftenChecker {
 				}
 			}
 		}
+		LOGGER.log(Level.DEBUG,"end checkDir");
 		return results;
 	}
-
-
+	
+	
+	private StringBuilder appendMessage (StringBuilder buildMessage, String baseDir, String message, String priority){
+		LOGGER.log(Level.INFO,"enter appendMessage");
+		LOGGER.log(Level.DEBUG,"enter appendMessage: buildMessage = "+buildMessage+" baseDir = "+baseDir+" message ="+message+" priority = "+priority);
+		buildMessage.append("<TR>");
+		buildMessage.append(TD);
+		buildMessage.append("<img src=\"" +baseDir + "images/"+priority+"priority.png\"  title=\"Voldoet NIET aan de voorschriften, het heeft hoge prioriteit om dit op te lossen.\"/>");
+		buildMessage.append(TD_END);
+		buildMessage.append("<TD class=\"left\">");
+		buildMessage.append(message);
+		buildMessage.append(TD_END);
+		buildMessage.append("</TR>");
+		LOGGER.log(Level.DEBUG,"end appendMessage");
+		return buildMessage;
+	}
 
 	private static String getDateString() {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
 		simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 		simpleDateFormat.applyPattern(STANDARD_DATE_FORMAT);
 		return simpleDateFormat.format(Calendar.getInstance().getTime());
-
 	}
-
-
 }
