@@ -41,6 +41,8 @@ package nl.denhaag.twb.voorschriften.common.cxf;
  * under the License.
  */
 import java.lang.reflect.Member;
+
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -65,7 +67,7 @@ import org.apache.cxf.binding.soap.wsdl.extensions.SoapHeader;
 import org.apache.cxf.common.util.CollectionUtils;
 import org.apache.cxf.common.util.StringUtils;
 import org.apache.cxf.helpers.CastUtils;
-import org.apache.cxf.helpers.WSDLHelper;
+//import org.apache.cxf.helpers.WSDLHelper;
 import org.apache.cxf.tools.common.ToolException;
 import org.apache.cxf.tools.validator.internal.AbstractDefinitionValidator;
 /**

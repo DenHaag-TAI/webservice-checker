@@ -29,9 +29,59 @@
 			<version>4.8.2</version>
 		</dependency>
 		<dependency>
+    		<groupId>org.apache.cxf</groupId>
+    		<artifactId>cxf-tools-validator</artifactId>
+    		<version>3.1.6</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.sun.xml.fastinfoset</groupId>
+    		<artifactId>FastInfoset</artifactId>
+    		<version>1.2.13</version>
+		</dependency>
+		<!-- dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-tools-validator</artifactId>
 			<version>2.7.10</version>
-		</dependency>		
+		</dependency-->
+		<dependency>
+    		<groupId>org.apache.cxf</groupId>
+    		<artifactId>cxf-core</artifactId>
+    		<version>3.1.6</version>
+		</dependency>
+		<dependency>
+    		<groupId>wsdl4j</groupId>
+    		<artifactId>wsdl4j</artifactId>
+    		<version>1.6.3</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.apache.ws.xmlschema</groupId>
+    		<artifactId>xmlschema-core</artifactId>
+    		<version>2.2.1</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.apache.cxf</groupId>
+    		<artifactId>cxf-tools-common</artifactId>
+    		<version>3.1.6</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.apache.cxf</groupId>
+    		<artifactId>cxf-rt-bindings-soap</artifactId>
+    		<version>3.1.6</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.sun.xml.bind</groupId>
+    		<artifactId>jaxb-xjc</artifactId>
+    		<version>2.2.11</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.sun.xml.bind</groupId>
+    		<artifactId>jaxb-impl</artifactId>
+    		<version>2.2.11</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.sun.xml.bind</groupId>
+    		<artifactId>jaxb-core</artifactId>
+    		<version>2.2.11</version>
+		</dependency>
 	</dependencies>
 </project>

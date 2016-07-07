@@ -61,18 +61,23 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
 
+import nl.denhaag.twb.appender.JTextAreaAppender;
 import nl.denhaag.twb.voorschriften.common.VoorschriftenChecker;
 import nl.denhaag.twb.voorschriften.table.IconTextCellRenderer;
 import nl.denhaag.twb.voorschriften.table.TableCellValue;
 
+import org.apache.log4j.Layout;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 
 public class VoorschriftenStandalone {
 	public static final String SOURCE_LOCATION = "source.location";
 	public static final String REPORTS_LOCATION = "reports.location";
 	protected static final String SETTINGS_PROPERTIES = "settings.properties";
 	private static final String LABELS_PROPERTIES = "/labels.properties";
-	private static final Logger LOGGER = Logger.getLogger(VoorschriftenStandalone.class);
+	//private static final Logger LOGGER = Logger.getLogger(VoorschriftenStandalone.class);
+	private static Logger LOGGER = Logger.getLogger(VoorschriftenStandalone.class);
 	private JFrame applicationFrame;
 	private JScrollPane resultScrollPane;
 	private JTextField sourceLocation;
@@ -116,6 +121,14 @@ public class VoorschriftenStandalone {
 			}
 		});
 	}
+	
+	public static Logger createLogger (JTextArea logTextArea) {
+		Layout layout = new PatternLayout ("%r [%t] %-5p %c %x - %m%n");
+		JTextAreaAppender jTextAreaAppender = new JTextAreaAppender(layout, logTextArea);
+		LOGGER.addAppender(jTextAreaAppender);
+		return LOGGER;
+	}
+
 
 	/**
 	 * Create the application.
@@ -283,6 +296,7 @@ public class VoorschriftenStandalone {
 		logTextArea = new JTextArea();
 		logTextArea.setEditable(false);
 		logScrollPane.setViewportView(logTextArea);
+		LOGGER = createLogger (logTextArea);
 
 		resultsPanel = new JPanel();
 		tabbedPane.addTab("Resultaten", null, resultsPanel, null);
@@ -539,13 +553,13 @@ public class VoorschriftenStandalone {
 	}
 	
 	public void log(String message, Exception e) {
-		this.getTabbedPane().setSelectedIndex(0);   
-		this.logTextArea.append("Exception: " + message + "\n");
-		Throwable cause = e.getCause();
-		while (cause != null){
-			this.logTextArea.append(cause.getMessage() + "\n");
-			cause = cause.getCause();
-		}
+//		this.getTabbedPane().setSelectedIndex(0);   
+//		this.logTextArea.append("Exception: " + message + "\n");
+//		Throwable cause = e.getCause();
+//		while (cause != null){
+//			this.logTextArea.append(cause.getMessage() + "\n");
+//			cause = cause.getCause();
+//		}
 		LOGGER.error(message,e);
 	}
 

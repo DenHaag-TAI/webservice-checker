@@ -33,25 +33,40 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JTextArea;
 import javax.swing.table.TableColumnModel;
 
+import nl.denhaag.twb.appender.JTextAreaAppender;
 import nl.denhaag.twb.voorschriften.common.TransformResult;
 import nl.denhaag.twb.voorschriften.common.VoorschriftenChecker;
 import nl.denhaag.twb.voorschriften.common.util.CommonFileUtils;
 import nl.denhaag.twb.voorschriften.common.util.VoorschriftenLogger;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Layout;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 
 
 public class GenerateReports extends Thread implements VoorschriftenLogger {
 
-	private static final Logger LOGGER = Logger.getLogger(GenerateReports.class);
+	private static final Logger LOGGER = //createLogger (JTextArea logTextArea); 
+			Logger.getLogger(GenerateReports.class);
 	private VoorschriftenStandalone voorschriftenStandalone;
 	private int max;
 	private int current = 1;
 	private String id;
-
+	
+	
+	public static Logger createLogger (JTextArea logTextArea) {
+		Layout layout = new PatternLayout ("%r [%t] %-5p %c %x - %m%n");
+		JTextAreaAppender jTextAreaAppender = new JTextAreaAppender(layout, logTextArea);
+		LOGGER.addAppender(jTextAreaAppender);
+		return LOGGER;
+	}
+	
+	
 	public GenerateReports(VoorschriftenStandalone voorschriftenStandalone) {
 		this.voorschriftenStandalone = voorschriftenStandalone;
 		id = "reports-" + System.currentTimeMillis();
@@ -99,7 +114,7 @@ public class GenerateReports extends Thread implements VoorschriftenLogger {
 		File sourceDir = null;
 		File reportsDir = null;
 		boolean zipReports = false;
-
+		createLogger(voorschriftenStandalone.getLogTextArea());
 		List<String> excludedNamespaces = getExcludedNamespaces();
 		logBigMessage("Source location: " + sourceLocation);
 		logBigMessage("Reports dir: " + finalReportsDir);
@@ -191,7 +206,8 @@ public class GenerateReports extends Thread implements VoorschriftenLogger {
 	}
 
 	public void logBigMessage(String logMessage) {
-		this.voorschriftenStandalone.log(logMessage);
+		//this.voorschriftenStandalone.log(logMessage);
+		LOGGER.log(Level.INFO,logMessage);
 	}
 
 	public void logBigMessage(String logMessage, Exception e) {
@@ -200,8 +216,8 @@ public class GenerateReports extends Thread implements VoorschriftenLogger {
 
 	public void logShortMessage(String logMessage) {
 		setMessage(logMessage);
-		this.voorschriftenStandalone.log(logMessage);
-
+//		this.voorschriftenStandalone.log(logMessage);
+		LOGGER.log(Level.INFO,logMessage);
 	}
 
 	private File getTempDir() {
