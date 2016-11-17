@@ -227,12 +227,14 @@ public class VoorschriftenChecker {
 							wsiCompliant = false;
 							failedWSDLs.add(sourceFile.getAbsolutePath());
 							for (String bpMessage : ex.getBpMessages()) {
+								System.err.println ("Message: "+bpMessage);
 								bpErrorMessages = appendMessage (bpErrorMessages,baseDir, bpMessage ,"high");
 								highPriority++;
 							}
 						}
 						if (ex.getOtherMessages().size() > 0) {
 							for (String otherMessage : ex.getOtherMessages()) {
+								System.err.println ("Message: "+otherMessage);
 								otherErrorMessages = appendMessage (otherErrorMessages,baseDir, otherMessage ,"low");
 								lowPriority++;
 							}
