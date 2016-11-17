@@ -155,9 +155,6 @@ public class TransformResult {
 		this.sourceFileName = sourceFileName;
 	}
 
-
-
-
 	public String getRelativeReportFileName() {
 		return relativeReportFileName;
 	}
@@ -178,7 +175,4 @@ public class TransformResult {
 	public void setDirPrefix(String dirPrefix) {
 		this.dirPrefix = dirPrefix;
 	}
-
-	
-    
 }
