@@ -311,7 +311,8 @@
 											<td class="center"><xsl:call-template name="passedWithParams"><xsl:with-param name="specificMessage"><xsl:text>De operatie moet beginnen met een kleine letter en is lowerCamelCase.</xsl:text></xsl:with-param></xsl:call-template></td>
 										</xsl:when>
 										<xsl:otherwise>
-											<td class="center"><xsl:call-template name="lowpriorityWithParams"><xsl:with-param name="specificMessage"><xsl:text>De operatie moet beginnen met een kleine letter en is lowerCamelCase.</xsl:text></xsl:with-param></xsl:call-template></td> 
+											<!-- td class="center"><xsl:call-template name="lowpriorityWithParams"><xsl:with-param name="specificMessage"><xsl:text>De operatie moet beginnen met een kleine letter en is lowerCamelCase.</xsl:text></xsl:with-param></xsl:call-template></td-->
+											<td class="center"><xsl:call-template name="warningWithParams"><xsl:with-param name="specificMessage"><xsl:text>De operatie moet beginnen met een kleine letter en is lowerCamelCase.</xsl:text></xsl:with-param></xsl:call-template></td> 
 										</xsl:otherwise>
 									</xsl:choose>	
 									 <td>
@@ -373,7 +374,8 @@
 											<td class="center"><xsl:call-template name="passedWithParams"><xsl:with-param name="specificMessage"><xsl:text>De operatie moet beginnen met een kleine letter en is lowerCamelCase.</xsl:text></xsl:with-param></xsl:call-template></td>
 										</xsl:when>
 										<xsl:otherwise>
-											<td class="center"><xsl:call-template name="lowpriorityWithParams"><xsl:with-param name="specificMessage"><xsl:text>De operatie moet beginnen met een kleine letter en is lowerCamelCase.</xsl:text></xsl:with-param></xsl:call-template></td> 
+											<!--td class="center"><xsl:call-template name="lowpriorityWithParams"><xsl:with-param name="specificMessage"><xsl:text>De operatie moet beginnen met een kleine letter en is lowerCamelCase.</xsl:text></xsl:with-param></xsl:call-template></td-->
+											<td class="center"><xsl:call-template name="warningWithParams"><xsl:with-param name="specificMessage"><xsl:text>De operatie moet beginnen met een kleine letter en is lowerCamelCase.</xsl:text></xsl:with-param></xsl:call-template></td> 
 										</xsl:otherwise>
 									</xsl:choose>										
 									<xsl:choose>
