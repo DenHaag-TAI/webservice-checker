@@ -23,6 +23,7 @@ package nl.denhaag.twb.voorschriften.common.xslt;
  */
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.HashMap;
@@ -43,11 +44,12 @@ import net.sf.saxon.s9api.XsltTransformer;
 import nl.denhaag.twb.voorschriften.common.TransformResult;
 import nl.denhaag.twb.voorschriften.common.util.VoorschriftenLogger;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class XMLTransformer {
 
-    private final static Logger LOGGER = Logger.getLogger(XMLTransformer.class);
+    private final static Logger LOGGER = LogManager.getLogger(XMLTransformer.class);
 
     private VoorschriftenLogger twbLogger;
     public XMLTransformer(VoorschriftenLogger twbLogger){

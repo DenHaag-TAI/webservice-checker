@@ -32,7 +32,7 @@ import javax.xml.transform.stream.StreamSource;
 
 public class CustomURIResolver implements URIResolver {
 
-	@Override
+//	@Override
 	public Source resolve(String href, String base) throws TransformerException {
 		ClassLoader cl = this.getClass().getClassLoader();
 		InputStream in = cl.getResourceAsStream(href);
