@@ -23,6 +23,8 @@ package nl.denhaag.twb.voorschriften.common;
  */
 
 import java.io.File;
+
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,11 +42,12 @@ import nl.denhaag.twb.voorschriften.common.util.VoorschriftenLogger;
 import nl.denhaag.twb.voorschriften.common.xslt.XMLTransformer;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 
 public class VoorschriftenChecker {
-	private static final Logger LOGGER = Logger.getLogger(VoorschriftenChecker.class);
+	private static final Logger LOGGER = LogManager.getLogger(VoorschriftenChecker.class);
 	private static final String TD_END = "</TD>";
 	private static final String TD = "<TD class=\"right\">";
 	public static final String SEPARATOR = "/";
@@ -74,7 +77,7 @@ public class VoorschriftenChecker {
 		}
 		return result;
 	}
-
+	
 	public List<TransformResult> generateReports(File sourceDir, File reportDir, List<String> excludedNamespaces) throws Exception {
 		LOGGER.log(Level.INFO,"enter generateReports");
 		LOGGER.log(Level.DEBUG,"enter generateReports: sourceDir = "+sourceDir+" reportDir = "+reportDir);
@@ -271,7 +274,6 @@ public class VoorschriftenChecker {
 		LOGGER.log(Level.DEBUG,"end checkDir");
 		return results;
 	}
-	
 	
 	private StringBuilder appendMessage (StringBuilder buildMessage, String baseDir, String message, String priority){
 		LOGGER.log(Level.INFO,"enter appendMessage");
