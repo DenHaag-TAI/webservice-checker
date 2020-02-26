@@ -24,6 +24,7 @@ package nl.denhaag.twb.voorschriften;
 
 
 import java.awt.Component;
+
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -66,18 +67,23 @@ import nl.denhaag.twb.voorschriften.common.VoorschriftenChecker;
 import nl.denhaag.twb.voorschriften.table.IconTextCellRenderer;
 import nl.denhaag.twb.voorschriften.table.TableCellValue;
 
-import org.apache.log4j.Layout;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+//import org.apache.log4j.Layout;
+//import org.apache.log4j.Level;
+//import org.apache.log4j.Logger;
+//import org.apache.log4j.PatternLayout;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LogEvent;
+//import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+
+
 
 public class VoorschriftenStandalone {
 	public static final String SOURCE_LOCATION = "source.location";
 	public static final String REPORTS_LOCATION = "reports.location";
 	protected static final String SETTINGS_PROPERTIES = "settings.properties";
 	private static final String LABELS_PROPERTIES = "/labels.properties";
-	//private static final Logger LOGGER = Logger.getLogger(VoorschriftenStandalone.class);
-	private static Logger LOGGER = Logger.getLogger(VoorschriftenStandalone.class);
+	protected static Logger logger = LogManager.getLogger("My Logger");
 	private JFrame applicationFrame;
 	private JScrollPane resultScrollPane;
 	private JTextField sourceLocation;
@@ -116,19 +122,11 @@ public class VoorschriftenStandalone {
 					window = new VoorschriftenStandalone();
 					window.applicationFrame.setVisible(true);
 				} catch (Exception e) {
-					LOGGER.error(e.getMessage(), e);
+					logger.error(e.getMessage(), e);
 				}
 			}
 		});
 	}
-	
-	public static Logger createLogger (JTextArea logTextArea) {
-		Layout layout = new PatternLayout ("%r [%t] %-5p %c %x - %m%n");
-		JTextAreaAppender jTextAreaAppender = new JTextAreaAppender(layout, logTextArea);
-		LOGGER.addAppender(jTextAreaAppender);
-		return LOGGER;
-	}
-
 
 	/**
 	 * Create the application.
@@ -152,7 +150,7 @@ public class VoorschriftenStandalone {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+			logger.error(e.getMessage(), e);
 		}
 		loadProperties(properties, SETTINGS_PROPERTIES);
 		loadPropertiesFromClasspath(labelProperties, LABELS_PROPERTIES);
@@ -296,7 +294,7 @@ public class VoorschriftenStandalone {
 		logTextArea = new JTextArea();
 		logTextArea.setEditable(false);
 		logScrollPane.setViewportView(logTextArea);
-		LOGGER = createLogger (logTextArea);
+		JTextAreaAppender.addLog4j2TextAreaAppender(logTextArea);
 
 		resultsPanel = new JPanel();
 		tabbedPane.addTab("Resultaten", null, resultsPanel, null);
@@ -333,7 +331,7 @@ public class VoorschriftenStandalone {
 				}
 				return null;
 			}
-		};
+		};	logger = LogManager.getLogger("My Logger");
 		resultTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -449,7 +447,7 @@ public class VoorschriftenStandalone {
 		try {
 			properties.load(new FileInputStream(fileName));
 		} catch (IOException ex) {
-			LOGGER.warn(ex.getMessage());
+			logger.warn(ex.getMessage());
 		}
 	}
 
@@ -457,7 +455,7 @@ public class VoorschriftenStandalone {
 		try {
 			properties.load(VoorschriftenStandalone.class.getResourceAsStream(fileName));
 		} catch (Exception ex) {
-			LOGGER.warn(ex.getMessage());
+			logger.warn(ex.getMessage());
 		}
 	}
 
@@ -465,7 +463,7 @@ public class VoorschriftenStandalone {
 		try {
 			properties.store(new FileOutputStream(fileName), "Stored by synchronizer");
 		} catch (IOException ex) {
-			LOGGER.warn(ex.getMessage());
+			logger.warn(ex.getMessage());
 		}
 	}
 
@@ -497,7 +495,7 @@ public class VoorschriftenStandalone {
 		return progressBar;
 	}
 
-	/**
+	/**out
 	 * @return the properties
 	 */
 	protected Properties getProperties() {
@@ -549,18 +547,19 @@ public class VoorschriftenStandalone {
 	public void log(String message) {
 		this.getTabbedPane().setSelectedIndex(0);   
 		this.logTextArea.append(message + "\n");
-		LOGGER.info(message);
+		logger.info(message);
 	}
 	
 	public void log(String message, Exception e) {
-//		this.getTabbedPane().setSelectedIndex(0);   
-//		this.logTextArea.append("Exception: " + message + "\n");
-//		Throwable cause = e.getCause();
-//		while (cause != null){
-//			this.logTextArea.append(cause.getMessage() + "\n");
-//			cause = cause.getCause();
-//		}
-		LOGGER.error(message,e);
+		System.err.println ("in de log");
+		this.getTabbedPane().setSelectedIndex(0);   
+		this.logTextArea.append("Exception: " + message + "\n");
+		Throwable cause = e.getCause();
+		while (cause != null){
+			this.logTextArea.append(cause.getMessage() + "\n");
+			cause = cause.getCause();
+		}
+		logger.error(message,e);
 	}
 
 	static class SourceFileFilter extends FileFilter {

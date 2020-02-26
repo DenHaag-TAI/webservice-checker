@@ -27,6 +27,8 @@ package nl.denhaag.twb.voorschriften;
  */
 
 import java.io.File;
+
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,28 +45,30 @@ import nl.denhaag.twb.voorschriften.common.util.CommonFileUtils;
 import nl.denhaag.twb.voorschriften.common.util.VoorschriftenLogger;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Layout;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-
+//import org.apache.log4j.Layout;
+//import org.apache.log4j.Level;
+//import org.apache.log4j.Logger;
+//import org.apache.log4j.PatternLayout;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 
 public class GenerateReports extends Thread implements VoorschriftenLogger {
 
 	private static final Logger LOGGER = //createLogger (JTextArea logTextArea); 
-			Logger.getLogger(GenerateReports.class);
+			LogManager.getLogger(GenerateReports.class);
 	private VoorschriftenStandalone voorschriftenStandalone;
 	private int max;
 	private int current = 1;
 	private String id;
 	
 	
-	public static Logger createLogger (JTextArea logTextArea) {
-		Layout layout = new PatternLayout ("%r [%t] %-5p %c %x - %m%n");
-		JTextAreaAppender jTextAreaAppender = new JTextAreaAppender(layout, logTextArea);
-		LOGGER.addAppender(jTextAreaAppender);
-		return LOGGER;
-	}
+//	public static Logger createLogger (JTextArea logTextArea) {
+//		Layout layout = new PatternLayout ("%r [%t] %-5p %c %x - %m%n");
+//		JTextAreaAppender jTextAreaAppender = new JTextAreaAppender(layout, logTextArea);
+//		LOGGER.addAppender(jTextAreaAppender);
+//		return LOGGER;
+//	}
 	
 	
 	public GenerateReports(VoorschriftenStandalone voorschriftenStandalone) {
@@ -84,6 +88,7 @@ public class GenerateReports extends Thread implements VoorschriftenLogger {
 		voorschriftenStandalone.getProgressLabel().setIcon(null);
 		voorschriftenStandalone.getViewIndexPageButton().setEnabled(false);
 	}
+	
 	private List<String> getExcludedNamespaces(){
 		List<JCheckBox> excludedNamespacesCheckBoxes = voorschriftenStandalone.getExcludedNamespacesCheckboxes();
 		List<String> excludedNamespaces = new ArrayList<String>();
@@ -114,7 +119,7 @@ public class GenerateReports extends Thread implements VoorschriftenLogger {
 		File sourceDir = null;
 		File reportsDir = null;
 		boolean zipReports = false;
-		createLogger(voorschriftenStandalone.getLogTextArea());
+//		createLogger(voorschriftenStandalone.getLogTextArea());
 		List<String> excludedNamespaces = getExcludedNamespaces();
 		logBigMessage("Source location: " + sourceLocation);
 		logBigMessage("Reports dir: " + finalReportsDir);

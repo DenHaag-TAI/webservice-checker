@@ -24,6 +24,7 @@ package nl.denhaag.twb.voorschriften;
 
 
 import java.awt.Color;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -35,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
 import nl.denhaag.twb.voorschriften.common.TransformResult;
 import nl.denhaag.twb.voorschriften.table.TableCellValue;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class TwDefaultTableModel extends DefaultTableModel {
 
