@@ -42,6 +42,7 @@ package nl.denhaag.twb.voorschriften.common.cxf;
  */
 import java.io.File;
 
+
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -165,7 +166,7 @@ public class WSDL11Validator extends AbstractDefinitionValidator {
             if (!validator.isValid()) {
                 notValid = true;
                 String errorMessage = validator.getErrorMessage();
-                if (org.apache.commons.lang.StringUtils.isNotBlank(errorMessage)){
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(errorMessage)){
 	                String[] errorMessages = errorMessage.split(lineSeparator);
 	                if (validator instanceof WSIBPValidator){
 	                	bpErrorMessages.addAll(Arrays.asList(errorMessages));
