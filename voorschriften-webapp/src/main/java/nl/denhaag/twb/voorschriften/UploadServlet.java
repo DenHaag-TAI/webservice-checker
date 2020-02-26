@@ -24,6 +24,8 @@ package nl.denhaag.twb.voorschriften;
 
 
 import java.io.DataInputStream;
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,14 +45,16 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+//import org.apache.log4j.Logger;
 
 /**
  * Servlet implementation class UploadServlet
  */
 public class UploadServlet extends HttpServlet {
-	private final static Logger LOGGER = Logger.getLogger(UploadServlet.class);
+	private final static Logger LOGGER = LogManager.getLogger(UploadServlet.class);
 	private static final long serialVersionUID = 1L;
 
 
@@ -156,8 +160,7 @@ public class UploadServlet extends HttpServlet {
         byte[] bbuf = new byte[1024];
         DataInputStream in = new DataInputStream(new FileInputStream(zipFile));
         int                 length   = 0;
-        while ((in != null) && ((length = in.read(bbuf)) != -1))
-        {
+        while ((in != null) && ((length = in.read(bbuf)) != -1)){
             op.write(bbuf,0,length);
         }
 

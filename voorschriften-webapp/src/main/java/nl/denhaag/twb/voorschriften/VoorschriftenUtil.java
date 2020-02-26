@@ -27,12 +27,14 @@ package nl.denhaag.twb.voorschriften;
 
 
 import nl.denhaag.twb.voorschriften.common.VoorschriftenChecker;
+
 import nl.denhaag.twb.voorschriften.common.util.VoorschriftenLogger;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class VoorschriftenUtil {
-	private final static Logger LOGGER = Logger.getLogger(VoorschriftenUtil.class);
+	private final static Logger LOGGER = LogManager.getLogger(VoorschriftenUtil.class);
 	private static VoorschriftenChecker voorschriftenChecker;
 	private static String baseLocation;
 
@@ -41,20 +43,19 @@ public class VoorschriftenUtil {
 		if (voorschriftenChecker == null){
 			VoorschriftenLogger twbLogger = new VoorschriftenLogger() {
 				
-			
-				@Override
+//				@Override
 				public void logShortMessage(String message) {
 					LOGGER.info(message);
 					
 				}
 				
-				@Override
+//				@Override
 				public void logBigMessage(String message) {
 					LOGGER.info(message);
 					
 				}
 				
-				@Override
+//				@Override
 				public void increment() {
 									
 				}

@@ -24,9 +24,12 @@ package nl.denhaag.twb.voorschriften;
 
 
 import javax.servlet.ServletContextEvent;
+
+
 import javax.servlet.ServletContextListener;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Application Lifecycle Listener implementation class VoorschriftenListener
@@ -34,7 +37,7 @@ import org.apache.log4j.Logger;
  */
 public class VoorschriftenListener implements ServletContextListener {
 	private static final String BASE_LOCATION = "BASE_LOCATION";
-	private final static Logger LOGGER = Logger.getLogger(VoorschriftenListener.class);
+	private final static Logger LOGGER = LogManager.getLogger(VoorschriftenListener.class);
 
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
