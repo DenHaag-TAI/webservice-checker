@@ -24,6 +24,7 @@ package nl.denhaag.twb.voorschriften.common.util;
 
 import java.io.BufferedReader;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -36,7 +37,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 /**
  * 
  */
@@ -110,7 +111,7 @@ public final class CommonFileUtils {
 					ZipEntry entry = new ZipEntry(getRelativePath(sourceDirPath, file));
 					zipOutputStream.putNextEntry(entry);
 					FileInputStream fileInputStream = new FileInputStream(file); // Stream
-																					// to
+																					//.// to
 																					// read
 																					// file
 					while ((bytesRead = fileInputStream.read(buffer)) != -1) {
